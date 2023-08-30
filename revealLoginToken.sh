@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 # Note: This may or may not reveal the token; it depends on the kubectl version you're using.
 #       Repeating the create token command from initialization will regenerate the token
