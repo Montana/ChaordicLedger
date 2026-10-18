@@ -69,20 +69,22 @@ def validateArgs():
                         "--node",
                         action="store",
                         help="A node to add",
-                        required=False)
+                        required=False,
+                        default="{}")
     parser.add_argument("-r",
                         "--relationship",
                         action="store",
                         help="A relationship to add",
-                        required=False)
+                        required=False,
+                        default="{}")
 
     args = parser.parse_args()
-
-    client = ipfshttpclient.connect(args.ipfsapiserver)
 
     validateMode(args.mode)
     validateNode(args.node)
     validateRelationship(args.relationship)
+
+    client = ipfshttpclient.connect(args.ipfsapiserver)
 
     return (client, args.mode, args.node, args.relationship)
 
@@ -119,7 +121,7 @@ if __name__ == "__main__":
         log.info(response.decode())
     elif mode == "write":
         jsonData = json.loads(
-            client.files.read("/graph.json").decode('utf-8)'))
+            client.files.read("/graph.json").decode('utf-8'))
         if len(jsonNode) > 0:
             log.info("Appending node: %s", node)
             jsonData["nodes"].append(jsonNode)
@@ -141,4 +143,3 @@ if __name__ == "__main__":
     endtime = datetime.utcnow()
     log.info("Done modifying graph file. Execution completed in %s",
              endtime - starttime)
-        "Done modifying graph file. Execution completed in %s", endtime-starttime)
